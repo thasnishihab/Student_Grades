@@ -27,7 +27,7 @@ admin.site.has_permission = lambda r: setattr(r, 'user', AccessUser()) or True
 
 urlpatterns = [
     # Your url configs then...
-    path(r'admin/', admin.site.urls),
+    path('', admin.site.urls, name='admin'),
     path('grades/', include('grades.urls'))
 ]
 
