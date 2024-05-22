@@ -16,7 +16,7 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 
-# import dj_database_url
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -119,7 +119,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'student_grades.wsgi.application'
 
-IS_HEROKU_APP = 'DATABASE_URL' in os.environ
+
 
 if IS_HEROKU_APP:
     # In production on Heroku the database configuration is derived from the `DATABASE_URL`
@@ -128,7 +128,7 @@ if IS_HEROKU_APP:
     # https://devcenter.heroku.com/articles/provisioning-heroku-postgres
     # https://github.com/jazzband/dj-database-url
     DATABASES = {
-        'default': dj_database_url.config()
+         'default': dj_database_url.config(default=config('DATABASE_URL'))
     }
 else:
     # When running locally in development or in CI, a sqlite database file will be used instead
@@ -189,17 +189,17 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'grades/staticfiles'), ]
 
-# STORAGES = {
-#     # Enable WhiteNoise's GZip and Brotli compression of static assets:
-#     # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
-#
-# # Don't store the original (un-hashed filename) version of static files, to reduce slug size:
-# # https://whitenoise.readthedocs.io/en/latest/django.html#WHITENOISE_KEEP_ONLY_HASHED_FILES
-# WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+STORAGES = {
+    # Enable WhiteNoise's GZip and Brotli compression of static assets:
+    # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# Don't store the original (un-hashed filename) version of static files, to reduce slug size:
+# https://whitenoise.readthedocs.io/en/latest/django.html#WHITENOISE_KEEP_ONLY_HASHED_FILES
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
