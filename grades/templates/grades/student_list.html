@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Grades</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h2 class="pb-5 mb-5" align="center">Student Grades</h2>
+    <div class="container">
+        <form method="get" class="form-inline" >
+        <input type="text" name="q" placeholder="Search by name" value="{{ request.GET.q }}" class="form-control">
+        <select name="remarks" class="form-control">
+            <option value="">All</option>
+            <option value="PASS" {% if request.GET.remarks == 'PASS' %}selected{% endif %}>PASS</option>
+            <option value="FAIL" {% if request.GET.remarks == 'FAIL' %}selected{% endif %}>FAIL</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+    </div>
+    <div class="container">
+        <table class="table mb-2">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Subject</th>
+                <th>Grade</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.subject.subject_name }}</td>
+                <td>{{ student.grade }}</td>
+                <td>{{ student.remarks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <div class="container">
+        <button class="btn btn-info" onclick="window.location.href='/admin/'">Site Administration</button>
+    </div>
+</body>
+</html>
