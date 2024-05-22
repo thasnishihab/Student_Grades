@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath student_grades student_grades.wsgi
