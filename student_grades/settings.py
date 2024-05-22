@@ -13,7 +13,7 @@ import os
 import secrets
 from pathlib import Path
 
-import dj_database_url
+# import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,11 +124,14 @@ if IS_HEROKU_APP:
     # https://devcenter.heroku.com/articles/provisioning-heroku-postgres
     # https://github.com/jazzband/dj-database-url
     DATABASES = {
-        "default": dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True,
-        ),
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "d5bhaebkdeu8qa",
+            "USER": "ub40fc7feudd3v",
+            "PASSWORD": "p5906bee4da6fe625fe0ff398892c51e2c7b9dc217dc62eaeceade003087c38df",
+            "HOST": "c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com",
+            "PORT": "5432"
+         }
     }
 else:
     # When running locally in development or in CI, a sqlite database file will be used instead
