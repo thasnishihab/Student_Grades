@@ -83,7 +83,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
     # Django doesn't support serving static assets in a production-ready way, so we use the
     # excellent WhiteNoise package to do so instead. The WhiteNoise middleware must be listed
     # after Django's `SecurityMiddleware` so that security redirects are still performed.
@@ -205,5 +205,5 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
