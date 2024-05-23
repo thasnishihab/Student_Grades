@@ -19,4 +19,4 @@ def student_list(request):
     if filter_remarks:
         students = students.filter(remarks=filter_remarks)
 
-    return render(request, 'grades/student_list.html', {'students': students})
+    return render(request, '\student_list.html', {'students': students})

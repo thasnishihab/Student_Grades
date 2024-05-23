@@ -110,8 +110,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'grades' / 'admin' / 'templates',
-            BASE_DIR / 'grades' / 'grades' / 'templates',
+            BASE_DIR / 'grades' / 'templates' / 'admin',
+            BASE_DIR / 'grades' / 'templates' / 'grades',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
