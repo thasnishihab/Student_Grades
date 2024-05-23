@@ -1,6 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
-
+{% load static %}
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
@@ -15,7 +15,7 @@
 <div id="content-main">
   {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
 </div>
-<div><button><a href="{% url 'student_grades' %}">Student Grades</a></button></div>
+<div><button class="btn btn-info"><a href="{% url 'grades:list' %}">Student Grades</a></button></div>
 {% endblock %}
 
 

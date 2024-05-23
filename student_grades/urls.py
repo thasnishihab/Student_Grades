@@ -17,6 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+import grades.urls
+
+from . import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.staticfiles.urls import static
 
 class AccessUser:
     has_module_perms = has_perm = __getattr__ = lambda s,*a,**kw: True
@@ -27,7 +32,8 @@ admin.site.has_permission = lambda r: setattr(r, 'user', AccessUser()) or True
 
 urlpatterns = [
     # Your url configs then...
-    path('', admin.site.urls, name='admin'),
-    path('grades/', include('grades.urls'))
+    path('admin/', admin.site.urls),
+    path('grades/', include(grades.urls))
 ]
 
+urlpatterns += staticfiles_urlpatterns()

@@ -187,8 +187,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'grades/staticfiles'), ]
-#
+
 # STORAGES = {
 #     # Enable WhiteNoise's GZip and Brotli compression of static assets:
 #     # https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support
