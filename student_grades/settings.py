@@ -42,6 +42,8 @@ SECRET_KEY = os.environ.get(
     default=secrets.token_urlsafe(nbytes=64),
 )
 
+# SECRET_KEY = 'django-insecure-kuwffx853j!)ej)_a$@!(bvn8h8-px4=#&$yk^%7++sn2cwzd2'
+
 # The `DYNO` env var is set on Heroku CI, but it's not a real Heroku app, so we have to
 # also explicitly exclude CI:
 # https://devcenter.heroku.com/articles/heroku-ci#immutable-environment-variables
@@ -108,6 +110,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'grades' / 'admin' / 'templates',
+            BASE_DIR / 'grades' / 'grades' / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
