@@ -1,1 +1,3 @@
-web: gunicorn --pythonpath student_grades student_grades.wsgi
+web: gunicorn student_grades.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate

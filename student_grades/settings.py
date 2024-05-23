@@ -18,6 +18,9 @@ from decouple import config
 
 import dj_database_url
 
+import environ
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,7 +59,6 @@ if IS_HEROKU_APP:
     ALLOWED_HOSTS = ['.herokuapp.com']
 else:
     ALLOWED_HOSTS = []
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -121,8 +123,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'student_grades.wsgi.application'
 
-
-
 if IS_HEROKU_APP:
     # In production on Heroku the database configuration is derived from the `DATABASE_URL`
     # environment variable by the dj-database-url package. `DATABASE_URL` will be set
@@ -130,8 +130,17 @@ if IS_HEROKU_APP:
     # https://devcenter.heroku.com/articles/provisioning-heroku-postgres
     # https://github.com/jazzband/dj-database-url
     DATABASES = {
-         'default': dj_database_url.config(default=config('DATABASE_URL'))
+        # 'default': dj_database_url.config(default=config('DATABASE_URL'))
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env('POSTGRES_DB_NAME'),
+            'USER': env('POSTGRES_USER'),
+            'PASSWORD': env('POSTGRES_PASSWORD'),
+            'HOST': env('POSTGRES_HOST'),
+            'PORT': env('POSTGRES_PORT'),
+        }
     }
+
 else:
     # When running locally in development or in CI, a sqlite database file will be used instead
     # to simplify initial setup. Longer term it's recommended to use Postgres locally too.
@@ -171,7 +180,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -183,14 +191,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_URL = '/media/'
 
 # STORAGES = {
 #     # Enable WhiteNoise's GZip and Brotli compression of static assets:
@@ -207,7 +214,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # import django_heroku
 # django_heroku.settings(locals())
