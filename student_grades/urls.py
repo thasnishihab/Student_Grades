@@ -22,17 +22,19 @@ import grades.urls
 from . import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.staticfiles.urls import static
-
 class AccessUser:
     has_module_perms = has_perm = __getattr__ = lambda s,*a,**kw: True
 
 admin.site.has_permission = lambda r: setattr(r, 'user', AccessUser()) or True
 
 # Register the admin views or call admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = [
     # Your url configs then...
     path('admin/', admin.site.urls),
+    # path('grades/', include(grades.urls))
+
     path('grades/', include(grades.urls))
 ]
 
